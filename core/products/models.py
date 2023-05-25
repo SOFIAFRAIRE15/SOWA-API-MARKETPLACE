@@ -3,9 +3,9 @@ from django.db import models
 # Create your models here.
 
 class Product(models.Model):
-    name = models.CharField(max_length=50),
-    price = models.FloatField(max_length=50),
-    #description = models.TextField(null = True, blank = True)
+    name = models.CharField(max_length=255, unique = True)
+    price = models.FloatField()
+    #description = models.TextField(blank = True, null = True)
     
     
     def __str__(self):
