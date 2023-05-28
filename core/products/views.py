@@ -10,6 +10,7 @@ from .serializers import ProductSerializer
 from .models import Product
 
 
+
 # Create your views here.
 
 def index_product(request):
@@ -35,4 +36,28 @@ class ProductView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+
+
+    def put (self, request, pk = None):
+        product = get_object_or_404(Product, pk=pk)
+        serializer = ProductSerializer(product, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+        else: 
+             return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+  
+
+    def delete (self, request, pk = None):
+        if pk: 
+            product = get_object_or_404(Product, pk=pk)
+            product.delete()
+        else:
+            return Response(
+                {"msg": "Necesitas enviar el ID del producto a eliminar"},
+                status = status.HTTP_400_BAD_REQUEST
+            )
+        return Response({"msg": f"Producto con ID {pk} eliminado"})
+
    

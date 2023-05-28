@@ -5,7 +5,7 @@ from .models import Product
 # Register your models here.
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['price']
-    list_filter = []
+    list_display = ['name', 'price', 'description']
+    list_filter = ['name']
 
 admin.site.register(Product, ProductAdmin)

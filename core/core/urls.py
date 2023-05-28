@@ -22,4 +22,8 @@ urlpatterns = [
 
     
     path('api/products/', include ('products.urls')),
+
+    
+
+
 ]
